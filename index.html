@@ -1,0 +1,301 @@
+<title>Catálogo de Ramos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Concepto: portada con logo centrado, tarjetas de categoría en rosa pastel y vista de productos con botón dorado de WhatsApp */
+:root {
+  --bg: #fff5f8;
+  --bg-2: #fde7ee;
+  --card: #ffffff;
+  --rosa: #f6cfdb;
+  --rosa-fuerte: #e59db4;
+  --dorado: #a37a22;
+  --dorado-claro: #e4c777;
+  --dorado-medio: #c9a24e;
+  --texto: #5b3a45;
+  --texto-suave: #8a6672;
+  --font: "Times New Roman", Times, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.5;
+  padding-block: 28px 96px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  min-height: 100%;
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; font-weight: 700; }
+
+/* Encabezado */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding-block: 8px 28px; }
+.logo {
+  width: 132px; height: 132px; border-radius: 50%;
+  border: 3px solid var(--dorado-medio);
+  background: var(--card);
+  display: grid; place-items: center; overflow: hidden;
+  box-shadow: 0 0 0 6px var(--rosa);
+}
+.logo img { width: 100%; height: 100%; object-fit: cover; }
+.hero h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); color: var(--dorado); letter-spacing: 0.02em; }
+.hero p { color: var(--texto-suave); font-style: italic; font-size: 1.15rem; max-width: 34ch; }
+.filete { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--dorado-medio), transparent); border: 0; margin: 0 auto 26px; }
+
+/* Categorías */
+.titulo-seccion { text-align: center; font-size: 1.5rem; color: var(--texto); margin-bottom: 18px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 18px; }
+.cat {
+  appearance: none; font: inherit; color: inherit; text-align: left; cursor: pointer;
+  background: var(--card); border: 1.5px solid var(--rosa); border-radius: 18px; padding: 0; overflow: hidden;
+  display: flex; flex-direction: column; min-width: 0;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.cat:hover { transform: translateY(-3px); border-color: var(--dorado-medio); box-shadow: 0 8px 22px rgba(201, 162, 78, .25); }
+.cat:focus-visible, .btn:focus-visible, .volver:focus-visible, .flotante:focus-visible { outline: 3px solid var(--dorado); outline-offset: 3px; }
+.cat .foto { aspect-ratio: 4 / 3; }
+.cat .info { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.cat h3 { font-size: 1.25rem; color: var(--dorado); }
+.cat p { color: var(--texto-suave); font-size: 1rem; }
+.cat .ver { margin-top: 8px; font-size: .95rem; color: var(--texto); border-top: 1px solid var(--rosa); padding-top: 8px; }
+
+/* Imagen o marcador de posición */
+.foto { width: 100%; background: linear-gradient(160deg, var(--rosa), var(--bg-2)); display: grid; place-items: center; overflow: hidden; }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto svg { width: 38%; max-width: 110px; opacity: .9; }
+
+/* Vista de categoría */
+.volver {
+  appearance: none; font: inherit; cursor: pointer; background: var(--card); color: var(--dorado);
+  border: 1.5px solid var(--dorado-medio); border-radius: 999px; padding: 8px 18px; font-size: 1rem; margin-bottom: 18px;
+}
+.volver:hover { background: var(--bg-2); }
+.cab-cat { text-align: center; margin-bottom: 22px; display: flex; flex-direction: column; gap: 6px; }
+.cab-cat h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); color: var(--dorado); }
+.cab-cat p { color: var(--texto-suave); font-style: italic; }
+.prod { background: var(--card); border: 1.5px solid var(--rosa); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.prod .foto { aspect-ratio: 1 / 1; }
+.prod .cuerpo { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.prod h3 { font-size: 1.25rem; }
+.prod .desc { color: var(--texto-suave); font-size: 1rem; flex: 1; }
+.prod .precio { color: var(--dorado); font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer;
+  font: inherit; font-weight: 700; font-size: 1.05rem; color: #3f2a10;
+  background: linear-gradient(135deg, var(--dorado-claro), var(--dorado-medio));
+  border: 0; border-radius: 999px; padding: 12px 22px;
+  transition: transform .15s ease, filter .15s ease;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.vacio { text-align: center; color: var(--texto-suave); font-style: italic; padding: 30px 0; }
+
+/* Botón flotante y pie */
+.flotante {
+  position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 5; box-shadow: 0 6px 18px rgba(120, 80, 20, .3);
+}
+footer { text-align: center; color: var(--texto-suave); font-size: .95rem; margin-top: 40px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="logo" id="logo"></div>
+    <h1 id="nombre"></h1>
+    <p id="eslogan"></p>
+  </header>
+  <hr class="filete">
+  <main id="vista"></main>
+  <footer id="pie"></footer>
+</div>
+<a class="btn flotante" id="flotante" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+
+<script>
+/* =====================================================
+   EDITA AQUÍ  (solo esta parte, lo demás no se toca)
+   ===================================================== */
+const NEGOCIO = {
+  nombre: "Nombre de tu negocio",          // aparece debajo del logo
+  eslogan: "Detalles hechos con amor",     // frase corta
+  whatsapp: "50200000000",                 // tu número con código de país, sin + ni espacios (Guatemala = 502)
+  logo: "",                                // ruta de tu logo, por ejemplo "fotos/logo.png". Vacío = dibujo de flor
+  pie: "Pedidos y envíos por WhatsApp"
+};
+
+/* Cada categoría tiene sus productos.
+   Para agregar un producto, copia un bloque { nombre, descripcion, precio, imagen } y cámbialo.
+   imagen: ruta de la foto, por ejemplo "fotos/ramo-rosas.jpg". Vacío = dibujo de flor. */
+const CATEGORIAS = [
+  {
+    id: "eternas",
+    nombre: "Ramos de flores eternas",
+    descripcion: "Flores preservadas que duran años.",
+    productos: [
+      { nombre: "Ramo de rosas eternas (ejemplo)", descripcion: "Descripción de ejemplo: 12 rosas preservadas con envoltura rosa y lazo dorado.", precio: "Q250", imagen: "" },
+      { nombre: "Ramo mixto eterno (ejemplo)", descripcion: "Descripción de ejemplo: rosas, hortensias y follaje seco en tonos pastel.", precio: "Q320", imagen: "" }
+    ]
+  },
+  {
+    id: "arreglos",
+    nombre: "Arreglos",
+    descripcion: "Cajas y bases con flores para regalar.",
+    productos: [
+      { nombre: "Arreglo en caja (ejemplo)", descripcion: "Descripción de ejemplo: caja redonda con flores frescas y tarjeta de dedicatoria.", precio: "Q280", imagen: "" },
+      { nombre: "Arreglo con globo (ejemplo)", descripcion: "Descripción de ejemplo: arreglo mediano con globo metálico dorado.", precio: "Q300", imagen: "" }
+    ]
+  },
+  {
+    id: "maquillaje",
+    nombre: "Ramos de maquillaje",
+    descripcion: "Productos de belleza armados como ramo.",
+    productos: [
+      { nombre: "Ramo de maquillaje básico (ejemplo)", descripcion: "Descripción de ejemplo: labiales, brillos y sombras en un ramo pequeño.", precio: "Q350", imagen: "" },
+      { nombre: "Ramo de maquillaje premium (ejemplo)", descripcion: "Descripción de ejemplo: set completo con base, rubor y brochas.", precio: "Q550", imagen: "" }
+    ]
+  },
+  {
+    id: "gomitas",
+    nombre: "Ramos de gomitas",
+    descripcion: "Dulces y gomitas en forma de ramo.",
+    productos: [
+      { nombre: "Ramo de gomitas (ejemplo)", descripcion: "Descripción de ejemplo: gomitas surtidas en tonos rosa con flores de papel.", precio: "Q120", imagen: "" },
+      { nombre: "Ramo de gomitas y chocolates (ejemplo)", descripcion: "Descripción de ejemplo: gomitas, chocolates y detalles dorados.", precio: "Q180", imagen: "" }
+    ]
+  },
+  {
+    id: "personalizados",
+    nombre: "Ramos personalizados",
+    descripcion: "Los armamos como tú los imaginas.",
+    productos: [
+      { nombre: "Ramo personalizado (ejemplo)", descripcion: "Descripción de ejemplo: tú eliges flores, colores, dulces y mensaje.", precio: "Desde Q200", imagen: "" }
+    ]
+  }
+];
+
+/* =====================================================
+   NO NECESITAS TOCAR NADA DESDE AQUÍ
+   ===================================================== */
+const $ = (id) => document.getElementById(id);
+
+const FLOR = '<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#f0b5c7"><circle cx="50" cy="26" r="16"/><circle cx="74" cy="44" r="16"/><circle cx="65" cy="72" r="16"/><circle cx="35" cy="72" r="16"/><circle cx="26" cy="44" r="16"/></g><circle cx="50" cy="52" r="12" fill="#e4c777"/></svg>';
+
+function crearFoto(src, alt) {
+  const d = document.createElement("div");
+  d.className = "foto";
+  if (src) {
+    const img = document.createElement("img");
+    img.src = src; img.alt = alt; img.loading = "lazy";
+    img.onerror = () => { d.innerHTML = FLOR; };
+    d.appendChild(img);
+  } else {
+    d.innerHTML = FLOR;
+  }
+  return d;
+}
+
+function el(tag, clase, texto) {
+  const n = document.createElement(tag);
+  if (clase) n.className = clase;
+  if (texto !== undefined) n.textContent = texto;
+  return n;
+}
+
+function linkWhatsApp(mensaje) {
+  return "https://wa.me/" + NEGOCIO.whatsapp + "?text=" + encodeURIComponent(mensaje);
+}
+
+function mensajeProducto(cat, p) {
+  let m = "Hola, quiero ordenar este producto:\n" + p.nombre + "\nCategoría: " + cat.nombre;
+  if (p.precio) m += "\nPrecio: " + p.precio;
+  if (p.imagen) {
+    try { m += "\nFoto: " + new URL(p.imagen, location.href).href; } catch (e) {}
+  }
+  return m;
+}
+
+function portada() {
+  const v = $("vista");
+  v.innerHTML = "";
+  v.appendChild(el("h2", "titulo-seccion", "Nuestras categorías"));
+  const g = el("div", "grid");
+  CATEGORIAS.forEach((c) => {
+    const b = el("button", "cat");
+    b.type = "button";
+    const primera = c.productos.find((p) => p.imagen);
+    b.appendChild(crearFoto(primera ? primera.imagen : "", c.nombre));
+    const info = el("div", "info");
+    info.appendChild(el("h3", "", c.nombre));
+    info.appendChild(el("p", "", c.descripcion));
+    info.appendChild(el("span", "ver", "Ver productos →"));
+    b.appendChild(info);
+    b.addEventListener("click", () => { location.hash = c.id; });
+    g.appendChild(b);
+  });
+  v.appendChild(g);
+}
+
+function categoria(c) {
+  const v = $("vista");
+  v.innerHTML = "";
+  const volver = el("button", "volver", "← Todas las categorías");
+  volver.type = "button";
+  volver.addEventListener("click", () => { location.hash = ""; });
+  v.appendChild(volver);
+
+  const cab = el("div", "cab-cat");
+  cab.appendChild(el("h2", "", c.nombre));
+  cab.appendChild(el("p", "", c.descripcion));
+  v.appendChild(cab);
+
+  if (!c.productos.length) { v.appendChild(el("p", "vacio", "Pronto tendremos productos aquí.")); return; }
+
+  const g = el("div", "grid");
+  c.productos.forEach((p) => {
+    const t = el("article", "prod");
+    t.appendChild(crearFoto(p.imagen, p.nombre));
+    const cu = el("div", "cuerpo");
+    cu.appendChild(el("h3", "", p.nombre));
+    cu.appendChild(el("p", "desc", p.descripcion));
+    if (p.precio) cu.appendChild(el("p", "precio", p.precio));
+    const a = el("a", "btn", "Ordena aquí");
+    a.href = linkWhatsApp(mensajeProducto(c, p));
+    a.target = "_blank"; a.rel = "noopener";
+    cu.appendChild(a);
+    t.appendChild(cu);
+    g.appendChild(t);
+  });
+  v.appendChild(g);
+}
+
+function mostrar() {
+  const id = location.hash.replace("#", "");
+  const c = CATEGORIAS.find((x) => x.id === id);
+  if (c) categoria(c); else portada();
+  window.scrollTo(0, 0);
+}
+
+function iniciar() {
+  document.title = NEGOCIO.nombre === "Nombre de tu negocio" ? "Catálogo de Ramos" : NEGOCIO.nombre;
+  $("nombre").textContent = NEGOCIO.nombre;
+  $("eslogan").textContent = NEGOCIO.eslogan;
+  $("pie").textContent = NEGOCIO.pie;
+  const logo = $("logo");
+  if (NEGOCIO.logo) {
+    const img = document.createElement("img");
+    img.src = NEGOCIO.logo; img.alt = "Logo de " + NEGOCIO.nombre;
+    img.onerror = () => { logo.innerHTML = FLOR; };
+    logo.appendChild(img);
+  } else {
+    logo.innerHTML = FLOR;
+  }
+  $("flotante").href = linkWhatsApp("Hola, quiero más información sobre sus ramos.");
+  window.addEventListener("hashchange", mostrar);
+  mostrar();
+}
+iniciar();
+</script>
